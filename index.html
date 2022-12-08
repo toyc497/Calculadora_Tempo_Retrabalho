@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Tempo de Retrabalhos</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/design.css">
+</head>
+<body>
+    <div class="container">
+        <div class="titlePageContainer">
+            <h1>Laboratório Mtec DF</h1>
+        </div>
+        <div class="formulario">
+                <div class="questionContainer firstOptContainer">
+                    <div class="titleQuestion">
+                        <h2>Tipo de Equipamento</h2>
+                    </div>
+                    <div class="titleAnsware">
+                        <input type="radio" name="equipmentType" id="notebook" value="notebook">
+                        <label for="">Notebook</label>
+                        <input type="radio" name="equipmentType" id="desktop" value="desktop">
+                        <label for="">Desktop</label>
+                        <input type="radio" name="equipmentType" id="allinone" value="allinone">
+                        <label for="">All In One</label>
+                    </div>
+                </div>
+                <div class="questionContainer">
+                    <div class="titleQuestion">
+                        <h2>Quantidade de Máquinas</h2>
+                    </div>
+                    <div class="titleAnsware">
+                        <input type="number" value="Quantidade" class="inpNumber" placeholder="Quantidade">
+                    </div>
+                </div>
+                <div class="questionContainer">
+                    <div class="titleQuestion">
+                        <h2>Tipo de Retrabalho</h2>
+                    </div>
+                    <div class="titleAnsware">
+                        <div class="optCont">
+                            <input type="radio" name="retrabalhoType" id="windows" value="windows">
+                            <label for="">Windows</label>
+                        </div>
+                        <div class="optCont">
+                            <input type="radio" name="retrabalhoType" id="office" value="office">                        
+                            <label for="">Office</label>
+                        </div>
+                        <div class="optCont">
+                            <input type="radio" name="retrabalhoType" id="windows_office" value="windows_office">
+                            <label for="">Windows + Office</label>
+                        </div>
+                        <div class="optCont">
+                            <input type="radio" name="retrabalhoType" id="upgrade" value="upgrade">
+                            <label for="">Upgrade</label>
+                        </div>
+                        <div class="optCont">
+                            <input type="radio" name="retrabalhoType" id="upgrade_windows" value="upgrade_windows">
+                            <label for="">Upgrade + Windows</label>
+                        </div>
+                        <div class="optCont">
+                            <input type="radio" name="retrabalhoType" id="upgrade_office" value="upgrade_office">
+                            <label for="">Upgrade + Office</label>
+                        </div>
+                        <div class="optCont">
+                            <input type="radio" name="retrabalhoType" id="upgrade_windows_office" value="upgrade_windows_office">
+                            <label for="">Upgrade + Windows + Office</label>
+                        </div>  
+                    </div>
+                </div>
+                <div class="questionContainer">
+                    <div class="titleQuestion">
+                        <h2>Quantidade de Colaboradores</h2>
+                    </div>
+                    <div class="titleAnsware">
+                        <input type="number" value="Quantidade" class="inpNumber" placeholder="Quantidade">
+                    </div>
+                </div>
+                <div class="btnContainer">
+                    <button id="btnCalcular">Calcular Tempo</button>
+                </div>
+        </div>
+    </div>
+
+    <script src="./js/processacalculo.js"></script>
+</body>
+</html>
