@@ -1,16 +1,12 @@
 let btnCalcular = document.getElementById("btnCalcular");
 
-let tipoEquipamento = "notebook";
-let quantidadeMaquinas = 50;
-let tipoRetrabalho = "tempoWindows";
-let quantidadePessoas = 8;
-
 const equipamento = [
     {
         nome:"notebook",
+        quantMaquinasBancadaAtivacao:6,
         tempoWindows:10,
         tempoOffice:14,
-        quantMaquinasBancadaAtivacao:6,
+        tempoWindowsOffice: 16,
         tempoUpgrade:5,
         tempoUpgradeWindows:15,
         tempoUpgradeOffice:19,
@@ -18,9 +14,10 @@ const equipamento = [
     },
     {
         nome:"desktop",
+        quantMaquinasBancadaAtivacao:6,
         tempoWindows:10,
         tempoOffice:14,
-        quantMaquinasBancadaAtivacao:6,
+        tempoWindowsOffice: 16,
         tempoUpgrade:5,
         tempoUpgradeWindows:15,
         tempoUpgradeOffice:19,
@@ -28,9 +25,10 @@ const equipamento = [
     },
     {
         nome:"allinone",
+        quantMaquinasBancadaAtivacao:4,
         tempoWindows:10,
         tempoOffice:14,
-        quantMaquinasBancadaAtivacao:6,
+        tempoWindowsOffice: 16,
         tempoUpgrade:5,
         tempoUpgradeWindows:15,
         tempoUpgradeOffice:19,
@@ -73,21 +71,86 @@ function calculaLevas(quantMaquinas,quantMaqBancada){
 
 }
 
+function converteTipoRetrabalho(tipoRetrabalho){
+
+    switch(tipoRetrabalho){
+        case "windows":
+            return "tempoWindows";
+            break;
+        case "office":
+            return "tempoOffice";
+            break;
+        case "windows_office":
+            return "tempoWindowsOffice";
+            break;
+        case "upgrade":
+            return "tempoUpgrade";
+            break;
+        case "upgrade_windows":
+            return "tempoUpgradeWindows";
+            break;
+        case "upgrade_office":
+            return "tempoUpgradeOffice";
+            break;
+        case "upgrade_windows_office":
+            return "tempoUpgradeWindowsOffice";
+            break;
+        default:
+            return 0;
+            break;
+    }
+
+}
+
 function retrabalhoAtivacao(tipoEquipamento,quantMaquinas,tipoRetrabalho,quantPessoas){
     
     let tipoEqConvertido = converteTipoEquipamento(tipoEquipamento);
     let dadosObjEquipamentos = equipamento[tipoEqConvertido];
     let quantMaqBancadaAux = dadosObjEquipamentos.quantMaquinasBancadaAtivacao;
     let totalLevas = calculaLevas(quantMaquinas,quantMaqBancadaAux);
-    let tempoRetrabAtivacao = dadosObjEquipamentos[tipoRetrabalho];
+    let tipoRetrabalhoConvertido = converteTipoRetrabalho(tipoRetrabalho);
+    let tempoRetrabAtivacao = dadosObjEquipamentos[tipoRetrabalhoConvertido];
     let tempoAtivacao = calculaTempoAtivacao(totalLevas,tempoRetrabAtivacao,quantPessoas);
-    console.log(tempoAtivacao);
-    
+    return tempoAtivacao;
+
 }
 
-retrabalhoAtivacao(tipoEquipamento,quantidadeMaquinas,tipoRetrabalho,quantidadePessoas);
+function getEquipamentType(){
+
+    let equipamentType = document.querySelector('input[name="equipmentType"]:checked').value;
+    return equipamentType;
+
+}
+
+function getQuantidadeMaquinas(){
+
+    let quantMaquinas = document.getElementById("quantMaquinas").value;
+    return quantMaquinas;
+
+}
+
+function getRetrabalhoType(){
+
+    let retrabalhoType = document.querySelector('input[name="retrabalhoType"]:checked').value;
+    return retrabalhoType;
+
+}
+
+function getQuantidadeColaboradores(){
+
+    let quantColaboradores = document.getElementById("quantidadeColaboradores").value;
+    return quantColaboradores;
+
+
+}
 
 btnCalcular.addEventListener('click',(e)=>{
     e.preventDefault();
-    alert("10 Minutos");
+    let tipoEquipamento = getEquipamentType();
+    let quantidadeMaquinas = getQuantidadeMaquinas();
+    let tipoRetrabalho = getRetrabalhoType();
+    let quantidadeColaboradores = getQuantidadeColaboradores();
+    let tempoTotalRetrabalho = retrabalhoAtivacao(tipoEquipamento,quantidadeMaquinas,tipoRetrabalho,quantidadeColaboradores);
+    alert("O Retrabalho levará em méida: "+tempoTotalRetrabalho+" minutos")
+
 });
