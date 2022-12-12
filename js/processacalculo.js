@@ -14,7 +14,7 @@ const equipamento = [
     },
     {
         nome:"desktop",
-        quantMaquinasBancadaAtivacao:6,
+        quantMaquinasBancadaAtivacao:7,
         tempoWindows:10,
         tempoOffice:14,
         tempoWindowsOffice: 16,
@@ -145,12 +145,24 @@ function getQuantidadeColaboradores(){
 }
 
 btnCalcular.addEventListener('click',(e)=>{
+
     e.preventDefault();
     let tipoEquipamento = getEquipamentType();
     let quantidadeMaquinas = getQuantidadeMaquinas();
     let tipoRetrabalho = getRetrabalhoType();
     let quantidadeColaboradores = getQuantidadeColaboradores();
-    let tempoTotalRetrabalho = retrabalhoAtivacao(tipoEquipamento,quantidadeMaquinas,tipoRetrabalho,quantidadeColaboradores);
+    let quantColabAux = 0;
+
+    if(tipoRetrabalho == "windows" || tipoRetrabalho == "office" || tipoRetrabalho == "windows_office" || tipoRetrabalho == "upgrade"){
+        quantColabAux = quantidadeColaboradores;
+        console.log("Porcentagem: "+quantColabAux);
+    }else{
+        let retiraColaboradoresMontagem = Math.ceil(quantidadeColaboradores*0.4);
+        quantColabAux = quantidadeColaboradores - retiraColaboradoresMontagem;
+        console.log("Porcentagem: "+quantColabAux);
+    }
+
+    let tempoTotalRetrabalho = retrabalhoAtivacao(tipoEquipamento,quantidadeMaquinas,tipoRetrabalho,quantColabAux);
     alert("O Retrabalho levará em méida: "+tempoTotalRetrabalho+" minutos")
 
 });
